@@ -13,8 +13,7 @@
 	<artifactId>chroma-cache-app</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>chroma-cache-app</name>
-	<description>Reference application of the Chroma Cache library
-		implementation</description>
+	<description>Reference application of the Chroma Cache library implementation</description>
 	<properties>
 		<java.version>17</java.version>
 	</properties>
