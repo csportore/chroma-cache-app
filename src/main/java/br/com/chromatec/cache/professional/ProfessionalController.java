@@ -21,7 +21,7 @@ public class ProfessionalController {
 	}
 	
 	@GetMapping("/{id}")
-	@Cacheable(cacheNames = "default")
+	@Cacheable
 	public ResponseEntity<?> getOneById(@PathVariable("id") Long id) {
 		return ResponseEntity.ok("User ID: " + id + " @" + LocalDateTime.now());
 	}
