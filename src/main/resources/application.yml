@@ -16,4 +16,4 @@ spring:
       mode: always
 chroma:
   cache:
-    name: funny-cache
+    name: professionals-cache

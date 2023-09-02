@@ -13,21 +13,22 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping(value = "/professionals", produces = MediaType.APPLICATION_JSON_VALUE)
-public class ProfessionalController {
+public class ProfessionalsController {
+	
 	
 	@GetMapping
-	public ResponseEntity<?> getAll() {
+	public ResponseEntity<?> findAll() {
 		return ResponseEntity.ok("Get All: @" + LocalDateTime.now());
 	}
 	
 	@GetMapping("/{id}")
-	@Cacheable
-	public ResponseEntity<?> getOneById(@PathVariable("id") Long id) {
+	@Cacheable("professionals-cache")
+	public ResponseEntity<?> findOneById(@PathVariable("id") Long id) {
 		return ResponseEntity.ok("User ID: " + id + " @" + LocalDateTime.now());
 	}
 	
 	@PostMapping
-	public ResponseEntity<?> postPatient() {
+	public ResponseEntity<?> insert() {
 		return ResponseEntity.noContent().build();
 	}
 }
