@@ -19,4 +19,8 @@ public class ProfessionalsService {
 	public List<ProfessionalDTO> findAll() {
 		return ProfessionalsMapper.INSTANCE.toDTOList(professionalsRepository.findAll());
 	}
+	
+	public void insert(ProfessionalDTO professionalDTO) {
+		this.professionalsRepository.save(ProfessionalsMapper.INSTANCE.toEntity(professionalDTO));
+	}
 }
