@@ -1,0 +1,1 @@
+**This is just and inoffensive note to remind myself to put existing repeating data structure's characteristics in more generic data structures here**

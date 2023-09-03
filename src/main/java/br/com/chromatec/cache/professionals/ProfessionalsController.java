@@ -1,7 +1,8 @@
-package br.com.chromatec.cache.professional;
+package br.com.chromatec.cache.professionals;
 
 import java.time.LocalDateTime;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -15,10 +16,15 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping(value = "/professionals", produces = MediaType.APPLICATION_JSON_VALUE)
 public class ProfessionalsController {
 	
+	private ProfessionalsService professionalsService;
+	
+	public ProfessionalsController(@Autowired ProfessionalsService professionalsService) {
+		this.professionalsService = professionalsService;
+	}
 	
 	@GetMapping
 	public ResponseEntity<?> findAll() {
-		return ResponseEntity.ok("Get All: @" + LocalDateTime.now());
+		return ResponseEntity.ok(this.professionalsService.findAll());
 	}
 	
 	@GetMapping("/{id}")

@@ -1,4 +1,4 @@
-package br.com.chromatec.cache.professional;
+package br.com.chromatec.cache.professionals;
 
 public enum ProfessionalOptions {
 	NUTRITIONIST ("Nutritionist"),
