@@ -11,10 +11,10 @@ public interface ProfessionalsMapper {
 	ProfessionalsMapper INSTANCE = Mappers.getMapper(ProfessionalsMapper.class);
 	
 	ProfessionalDTO toDTO(Professional p);
-	ProfessionalDTO toDTO(ProfessionalRegistrationVO p);
+	ProfessionalDTO toDTO(ProfessionalRepresentation p);
 	
 	Professional toEntity(ProfessionalDTO p);
 	
-	List<ProfessionalDTO> toDTOList(List<Professional> p);
-	List<Professional> toEntityList(List<ProfessionalDTO> p);
+	List<ProfessionalDTO> toDTOList(Iterable<Professional> p);
+	List<Professional> toEntityList(Iterable<ProfessionalDTO> p);
 }

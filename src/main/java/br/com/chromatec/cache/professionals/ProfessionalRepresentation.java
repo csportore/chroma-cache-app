@@ -1,6 +1,6 @@
 package br.com.chromatec.cache.professionals;
 
-public class ProfessionalRegistrationVO {
+public class ProfessionalRepresentation {
 	
 	private String name;
 	private ProfessionalOptions profession;
