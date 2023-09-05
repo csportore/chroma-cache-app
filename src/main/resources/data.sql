@@ -4,6 +4,18 @@ INSERT INTO professionals(name, profession) VALUES ('Professional3', 'NUTRITIONI
 INSERT INTO professionals(name, profession) VALUES ('Professional4', 'DIETITIAN');
 INSERT INTO professionals(name, profession) VALUES ('Professional5', 'NUTRITIONIST');
 
+INSERT INTO patients(name, registration_date_time) VALUES ('Patient1', CURRENT_TIMESTAMP);
+INSERT INTO patients(name, registration_date_time) VALUES ('Patient2', CURRENT_TIMESTAMP);
+INSERT INTO patients(name, registration_date_time) VALUES ('Patient3', CURRENT_TIMESTAMP);
+INSERT INTO patients(name, registration_date_time) VALUES ('Patient4', CURRENT_TIMESTAMP);
+INSERT INTO patients(name, registration_date_time) VALUES ('Patient5', CURRENT_TIMESTAMP);
+INSERT INTO patients(name, registration_date_time) VALUES ('Patient6', CURRENT_TIMESTAMP);
+INSERT INTO patients(name, registration_date_time) VALUES ('Patient7', CURRENT_TIMESTAMP);
+INSERT INTO patients(name, registration_date_time) VALUES ('Patient8', CURRENT_TIMESTAMP);
+INSERT INTO patients(name, registration_date_time) VALUES ('Patient9', CURRENT_TIMESTAMP);
+INSERT INTO patients(name, registration_date_time) VALUES ('Patient10', CURRENT_TIMESTAMP);
+
+/*
 INSERT INTO patients(name, professional_id, registration_date_time) VALUES ('Patient1', 1, CURRENT_TIMESTAMP);
 INSERT INTO patients(name, professional_id, registration_date_time) VALUES ('Patient2', 2, CURRENT_TIMESTAMP);
 INSERT INTO patients(name, professional_id, registration_date_time) VALUES ('Patient3', 3, CURRENT_TIMESTAMP);
@@ -14,3 +26,4 @@ INSERT INTO patients(name, professional_id, registration_date_time) VALUES ('Pat
 INSERT INTO patients(name, professional_id, registration_date_time) VALUES ('Patient8', 2, CURRENT_TIMESTAMP);
 INSERT INTO patients(name, professional_id, registration_date_time) VALUES ('Patient9', 3, CURRENT_TIMESTAMP);
 INSERT INTO patients(name, professional_id, registration_date_time) VALUES ('Patient10', 3, CURRENT_TIMESTAMP);
+*/

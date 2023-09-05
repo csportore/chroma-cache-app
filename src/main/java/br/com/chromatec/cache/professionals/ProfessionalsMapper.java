@@ -12,6 +12,7 @@ public interface ProfessionalsMapper {
 	
 	ProfessionalDTO toDTO(Professional p);
 	ProfessionalDTO toDTO(ProfessionalRepresentation p);
+	ProfessionalDTO toDTO(Long id, ProfessionalRepresentation p);
 	
 	Professional toEntity(ProfessionalDTO p);
 	

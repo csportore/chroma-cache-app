@@ -16,6 +16,12 @@ public class ProfessionalsService {
 		this.repository = repository;
 	}
 	
+	// CREATE
+	public ProfessionalDTO insert(ProfessionalDTO professionalDTO) {
+		return ProfessionalsMapper.INSTANCE.toDTO(this.repository.save(ProfessionalsMapper.INSTANCE.toEntity(professionalDTO)));
+	}
+	
+	// READ
 	public ProfessionalDTO findById(Long id) throws NoSuchElementException {                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          
 		return ProfessionalsMapper.INSTANCE.toDTO(this.repository.findById(id).orElseThrow());
 	}
@@ -24,16 +30,12 @@ public class ProfessionalsService {
 		return ProfessionalsMapper.INSTANCE.toDTOList(this.repository.findAll());
 	}
 	
-	public void insert(ProfessionalDTO professionalDTO) {
-		this.repository.save(ProfessionalsMapper.INSTANCE.toEntity(professionalDTO));
-	}
-	  
-	public ProfessionalDTO update(Long id, ProfessionalDTO professionalDTO) {
-		var dto = this.repository.save(ProfessionalsMapper.INSTANCE.toEntity(professionalDTO));
-		dto.setId(id);
-		return ProfessionalsMapper.INSTANCE.toDTO(dto);
+	// UPDATE
+	public ProfessionalDTO update(ProfessionalDTO professionalDTO) {
+		return ProfessionalsMapper.INSTANCE.toDTO(this.repository.save(ProfessionalsMapper.INSTANCE.toEntity(professionalDTO)));
 	}
 	
+	// DELETE
 	public void delete(Long id) {
 		this.repository.deleteById(id);
 	}

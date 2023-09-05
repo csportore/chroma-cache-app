@@ -28,7 +28,11 @@ public class ProfessionalsController {
 	
 	@GetMapping
 	public ResponseEntity<?> findAll() {
-		return ResponseEntity.ok(this.professionalsService.findAll());
+		try {
+			return ResponseEntity.ok(this.professionalsService.findAll());
+		} catch (Exception e) {
+			return ResponseEntity.status(HttpStatus.NO_CONTENT).body("No records found");
+		}
 	}
 	
 	@GetMapping("/{id}")
@@ -37,28 +41,38 @@ public class ProfessionalsController {
 		try {
 			return ResponseEntity.ok(this.professionalsService.findById(id));
 		} catch (NoSuchElementException nsee) {
-			return ResponseEntity.status(HttpStatus.NO_CONTENT).body(nsee.getMessage());
+			return ResponseEntity.status(HttpStatus.NO_CONTENT).body("No records found for " + id);
 		}
 	}
 	
 	@PostMapping
 	public ResponseEntity<?> insert(@RequestBody ProfessionalRepresentation representation) {
-		this.professionalsService.insert(
-				ProfessionalsMapper.INSTANCE.toDTO(representation));
-		return ResponseEntity.ok("Professional " + representation.getName() + " was registered.");
+		try {
+			return ResponseEntity.ok(this.professionalsService.insert(ProfessionalsMapper.INSTANCE.toDTO(representation)));
+		} catch (Exception e) {
+			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Unable to register professional");
+		}
+		
 	}
 	
 	@PutMapping("/{id}")
 	public ResponseEntity<?> update(@PathVariable("id") Long id, @RequestBody ProfessionalRepresentation representation) {
-		return ResponseEntity.ok(
-				this.professionalsService.update(id,
-				ProfessionalsMapper.INSTANCE.toDTO(representation)));
+		try {
+			return ResponseEntity.ok(
+					this.professionalsService.update(ProfessionalsMapper.INSTANCE.toDTO(id, representation)));
+		} catch (Exception e) {
+			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Unable to update professional");
+		}
 	}
 	
 	@DeleteMapping("/{id}")
 	public ResponseEntity<?> delete(@PathVariable("id") Long id) {
-		this.professionalsService.delete(id);
-		return ResponseEntity.status(HttpStatus.OK).body("Professional with id: " + id + " was deleted.");
+		try {
+			this.professionalsService.delete(id);
+			return ResponseEntity.status(HttpStatus.OK).body("Professional with id: " + id + " was deleted.");
+		} catch (Exception e) {
+			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Unable to update professional");
+		}
 	}
 	
 
