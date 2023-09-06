@@ -57,37 +57,5 @@ public class Professional implements Serializable{
 	public void setProfession(ProfessionalOptions profession) {
 		this.profession = profession;
 	}
-
-//	public List<Patient> getPatients() {
-//		return patients;
-//	}
-//
-//	public void setPatients(List<Patient> patients) {
-//		this.patients = patients;
-//	}
-//
-//	@Override
-//	public int hashCode() {
-//		return Objects.hash(id, name, patients, profession);
-//	}
-//
-//	@Override
-//	public boolean equals(Object obj) {
-//		if (this == obj)
-//			return true;
-//		if (obj == null)
-//			return false;
-//		if (getClass() != obj.getClass())
-//			return false;
-//		Professional other = (Professional) obj;
-//		return Objects.equals(id, other.id) && Objects.equals(name, other.name)
-//				&& Objects.equals(patients, other.patients) && profession == other.profession;
-//	}
-//
-//	@Override
-//	public String toString() {
-//		return "Professional [id=" + id + ", name=" + name + ", profession=" + profession + ", patients=" + patients
-//				+ "]";
-//	}
 	
 }

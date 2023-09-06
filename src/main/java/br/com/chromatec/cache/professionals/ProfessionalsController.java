@@ -26,12 +26,25 @@ public class ProfessionalsController {
 		this.professionalsService = professionalsService;
 	}
 	
+	@PostMapping
+	public ResponseEntity<?> insert(@RequestBody ProfessionalRepresentation representation) {
+		try {
+			var dto = this.professionalsService.insert(ProfessionalsMapper.INSTANCE.toDTO(representation));
+			return ResponseEntity.ok().body(ProfessionalsMapper.INSTANCE.toRepresentation(dto));
+		} catch (Exception e) {
+			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("OMG - POST");
+		}
+	}
+	
 	@GetMapping
 	public ResponseEntity<?> findAll() {
 		try {
-			return ResponseEntity.ok(this.professionalsService.findAll());
-		} catch (Exception e) {
+			return ResponseEntity.ok(ProfessionalsMapper.INSTANCE.toRepresentationList(
+					this.professionalsService.findAll()));
+		} catch (NoSuchElementException nsee) {
 			return ResponseEntity.status(HttpStatus.NO_CONTENT).body("No records found");
+		} catch (Exception e) {
+			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("OMG - GET ALL");
 		}
 	}
 	
@@ -39,29 +52,22 @@ public class ProfessionalsController {
 	@Cacheable("professionals-cache")
 	public ResponseEntity<?> findById(@PathVariable("id") Long id) {
 		try {
-			return ResponseEntity.ok(this.professionalsService.findById(id));
+			return ResponseEntity.ok(ProfessionalsMapper.INSTANCE.toRepresentation(
+					this.professionalsService.findById(id)));
 		} catch (NoSuchElementException nsee) {
 			return ResponseEntity.status(HttpStatus.NO_CONTENT).body("No records found for " + id);
-		}
-	}
-	
-	@PostMapping
-	public ResponseEntity<?> insert(@RequestBody ProfessionalRepresentation representation) {
-		try {
-			return ResponseEntity.ok(this.professionalsService.insert(ProfessionalsMapper.INSTANCE.toDTO(representation)));
 		} catch (Exception e) {
-			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Unable to register professional");
+			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("OMG - GET");
 		}
-		
 	}
 	
 	@PutMapping("/{id}")
 	public ResponseEntity<?> update(@PathVariable("id") Long id, @RequestBody ProfessionalRepresentation representation) {
 		try {
-			return ResponseEntity.ok(
-					this.professionalsService.update(ProfessionalsMapper.INSTANCE.toDTO(id, representation)));
+			var dto = this.professionalsService.update(id, ProfessionalsMapper.INSTANCE.toDTO(representation));
+			return ResponseEntity.ok().body(ProfessionalsMapper.INSTANCE.toRepresentation(dto));
 		} catch (Exception e) {
-			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Unable to update professional");
+			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("OMG - PUT");
 		}
 	}
 	
@@ -71,7 +77,7 @@ public class ProfessionalsController {
 			this.professionalsService.delete(id);
 			return ResponseEntity.status(HttpStatus.OK).body("Professional with id: " + id + " was deleted.");
 		} catch (Exception e) {
-			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Unable to update professional");
+			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("OMG - DELETE");
 		}
 	}
 	

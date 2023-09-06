@@ -4,21 +4,19 @@ public class ProfessionalRepresentation {
 	
 	private String name;
 	private ProfessionalOptions profession;
+	
+	public ProfessionalRepresentation(String name, ProfessionalOptions profession) {
+		super();
+		this.name = name;
+		this.profession = profession;
+	}
 
 	public String getName() {
 		return name;
 	}
 
-	public void setName(String name) {
-		this.name = name;
-	}
-
 	public ProfessionalOptions getProfession() {
 		return profession;
-	}
-
-	public void setProfession(ProfessionalOptions profession) {
-		this.profession = profession;
 	}
 
 }
