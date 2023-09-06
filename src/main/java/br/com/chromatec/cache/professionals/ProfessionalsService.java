@@ -9,34 +9,39 @@ import org.springframework.stereotype.Service;
 @Service
 public class ProfessionalsService {
 	
-	private ProfessionalsRepository repository;
+	private ProfessionalsRepository professionalsRepository;
 	
 	public ProfessionalsService(
-			@Autowired ProfessionalsRepository repository) {
-		this.repository = repository;
+			@Autowired ProfessionalsRepository professionalsRepository) {
+		this.professionalsRepository = professionalsRepository;
 	}
 	
 	// CREATE
-	public ProfessionalDTO insert(ProfessionalDTO professionalDTO) {
-		return ProfessionalsMapper.INSTANCE.toDTO(this.repository.save(ProfessionalsMapper.INSTANCE.toEntity(professionalDTO)));
+	public ProfessionalDTO insert(ProfessionalDTO dto) {
+		return ProfessionalsMapper.INSTANCE.toDTO(
+				this.professionalsRepository.save(ProfessionalsMapper.INSTANCE.toEntity(dto)));
 	}
 	
 	// READ
 	public ProfessionalDTO findById(Long id) throws NoSuchElementException {                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          
-		return ProfessionalsMapper.INSTANCE.toDTO(this.repository.findById(id).orElseThrow());
+		return ProfessionalsMapper.INSTANCE.toDTO(
+				this.professionalsRepository.findById(id).orElseThrow());
 	}
 
 	public List<ProfessionalDTO> findAll() {
-		return ProfessionalsMapper.INSTANCE.toDTOList(this.repository.findAll());
+		return ProfessionalsMapper.INSTANCE.toDTOList(
+				this.professionalsRepository.findAll());
 	}
 	
 	// UPDATE
-	public ProfessionalDTO update(ProfessionalDTO professionalDTO) {
-		return ProfessionalsMapper.INSTANCE.toDTO(this.repository.save(ProfessionalsMapper.INSTANCE.toEntity(professionalDTO)));
+	public ProfessionalDTO update(Long id, ProfessionalDTO dto) {
+		dto.setId(id);
+		return ProfessionalsMapper.INSTANCE.toDTO(
+				this.professionalsRepository.save(ProfessionalsMapper.INSTANCE.toEntity(dto)));
 	}
 	
 	// DELETE
 	public void delete(Long id) {
-		this.repository.deleteById(id);
+		this.professionalsRepository.deleteById(id);
 	}
 }
