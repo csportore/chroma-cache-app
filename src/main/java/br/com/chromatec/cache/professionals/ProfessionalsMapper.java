@@ -1,23 +1,41 @@
 package br.com.chromatec.cache.professionals;
 
-import java.util.List;
+import br.com.chromatec.cache.shared.CommonControllerMapper;
+import br.com.chromatec.cache.shared.CommonServiceMapper;
 
-import org.mapstruct.Mapper;
-import org.mapstruct.factory.Mappers;
+public class ProfessionalsMapper implements CommonControllerMapper<ProfessionalDTO, ProfessionalRepresentation>,
+        CommonServiceMapper<ProfessionalDTO, Professional> {
 
-@Mapper
-public interface ProfessionalsMapper {
-	
-	ProfessionalsMapper INSTANCE = Mappers.getMapper(ProfessionalsMapper.class);
-	
-	ProfessionalDTO toDTO(Professional p);
-	List<ProfessionalDTO> toDTOList(Iterable<Professional> p);
-	ProfessionalDTO toDTO(ProfessionalRepresentation p);
-	List<ProfessionalDTO> toDTOList(List<ProfessionalRepresentation> p);
-	
-	ProfessionalRepresentation toRepresentation(ProfessionalDTO p);
-	List<ProfessionalRepresentation> toRepresentationList(List<ProfessionalDTO> p);
-	
-	Professional toEntity(ProfessionalDTO p);
-	List<Professional> toEntityList(Iterable<ProfessionalDTO> p);
+    public static ProfessionalsMapper INSTANCE = new ProfessionalsMapper();
+
+    private ProfessionalsMapper(){}
+
+    @Override
+    public ProfessionalDTO representationToDTO(ProfessionalRepresentation representation) {
+        var dto = new ProfessionalDTO();
+        dto.setProfession(representation.getProfession());
+        dto.setName(representation.getName());
+        return dto;
+    }
+
+    @Override
+    public ProfessionalRepresentation dtoToRepresentation(ProfessionalDTO professionalDTO) {
+        return new ProfessionalRepresentation(professionalDTO.getName(), professionalDTO.getProfession());
+    }
+
+    @Override
+    public ProfessionalDTO entityToDTO(Professional e) {
+        var dto = new ProfessionalDTO();
+        dto.setId(e.getId());
+        dto.setName(e.getName());
+        dto.setProfession(e.getProfession());
+        return dto;
+    }
+
+    @Override
+    public Professional dtoToEntity(ProfessionalDTO professionalDTO) {
+        var entity = new Professional(
+                professionalDTO.getId(), professionalDTO.getName(), professionalDTO.getProfession());
+        return null;
+    }
 }

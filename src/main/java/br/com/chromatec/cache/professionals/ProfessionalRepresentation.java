@@ -2,8 +2,8 @@ package br.com.chromatec.cache.professionals;
 
 public class ProfessionalRepresentation {
 	
-	private String name;
-	private ProfessionalOptions profession;
+	private final String name;
+	private final ProfessionalOptions profession;
 	
 	public ProfessionalRepresentation(String name, ProfessionalOptions profession) {
 		super();

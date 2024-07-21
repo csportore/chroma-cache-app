@@ -1,8 +1,11 @@
 ---
+server:
+  servlet:
+    context-path: /ChromaCacheApp
 spring:
   datasource:
     username: postgres
-    password: ${POSTGRES_PASSWORD}
+    password: {POSTGRES_PASSWORD}
     url: jdbc:postgresql://localhost:5432/cache-app
   jpa:
     properties:
@@ -14,6 +17,6 @@ spring:
   sql:
     init:
       mode: always
-chroma:
-  cache:
-    name: professionals-cache
+#chroma:
+#  cache:
+#    name: professionals-cache

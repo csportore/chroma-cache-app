@@ -1,6 +1,7 @@
 package br.com.chromatec.cache.professionals;
 
 import java.io.Serializable;
+import java.util.Objects;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -13,10 +14,10 @@ import jakarta.persistence.Table;
 
 @Entity
 @Table(name = "professionals")
-public class Professional implements Serializable{
+public class Professional implements Serializable {
 	
 	/**
-	 * 
+	 * The serial version UID
 	 */
 	private static final long serialVersionUID = 8669041838179319866L;
 
@@ -33,6 +34,14 @@ public class Professional implements Serializable{
 	
 //	@OneToMany(fetch = FetchType.LAZY, mappedBy = "professional")
 //	private List<Patient> patients;
+
+	public Professional() {}
+
+	public Professional(Long id, String name, ProfessionalOptions profession) {
+		this.id = id;
+		this.name = name;
+		this.profession = profession;
+	}
 
 	public Long getId() {
 		return id;
@@ -57,5 +66,17 @@ public class Professional implements Serializable{
 	public void setProfession(ProfessionalOptions profession) {
 		this.profession = profession;
 	}
-	
+
+	@Override
+	public boolean equals(Object o) {
+		if (this == o) return true;
+		if (o == null || getClass() != o.getClass()) return false;
+		Professional that = (Professional) o;
+		return Objects.equals(id, that.id) && Objects.equals(name, that.name) && profession == that.profession;
+	}
+
+	@Override
+	public int hashCode() {
+		return Objects.hash(id, name, profession);
+	}
 }
