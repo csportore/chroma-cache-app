@@ -1,23 +1,12 @@
 package br.com.chromatec.cache.professionals;
 
-import java.util.List;
-
+import br.com.chromatec.cache.shared.CustomMapper;
 import org.mapstruct.Mapper;
 import org.mapstruct.factory.Mappers;
 
 @Mapper
-public interface ProfessionalsMapper {
+public interface ProfessionalsMapper extends CustomMapper<ProfessionalDTO, Professional, ProfessionalRepresentation, Long> {
 	
 	ProfessionalsMapper INSTANCE = Mappers.getMapper(ProfessionalsMapper.class);
-	
-	ProfessionalDTO toDTO(Professional p);
-	List<ProfessionalDTO> toDTOList(Iterable<Professional> p);
-	ProfessionalDTO toDTO(ProfessionalRepresentation p);
-	List<ProfessionalDTO> toDTOList(List<ProfessionalRepresentation> p);
-	
-	ProfessionalRepresentation toRepresentation(ProfessionalDTO p);
-	List<ProfessionalRepresentation> toRepresentationList(List<ProfessionalDTO> p);
-	
-	Professional toEntity(ProfessionalDTO p);
-	List<Professional> toEntityList(Iterable<ProfessionalDTO> p);
+
 }

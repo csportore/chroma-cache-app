@@ -6,7 +6,7 @@
 	<parent>
 		<groupId>org.springframework.boot</groupId>
 		<artifactId>spring-boot-starter-parent</artifactId>
-		<version>3.1.2</version>
+		<version>3.3.2</version>
 		<relativePath /> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>br.com.chromatec.cache</groupId>
@@ -52,11 +52,11 @@
 			<artifactId>postgresql</artifactId>
 			<scope>runtime</scope>
 		</dependency>
-		<dependency>
-			<groupId>br.com.chromatec.multicloud</groupId>
-			<artifactId>chroma-cache</artifactId>
-			<version>0.0.1-SNAPSHOT</version>
-		</dependency>
+<!--		<dependency>-->
+<!--			<groupId>br.com.chromatec.multicloud</groupId>-->
+<!--			<artifactId>chroma-cache</artifactId>-->
+<!--			<version>0.0.1-SNAPSHOT</version>-->
+<!--		</dependency>-->
 		<!-- Mapstruct was chosen based on the article:
 		https://www.baeldung.com/java-performance-mapping-frameworks. 
 		And because JMapper have years of no updates-->
