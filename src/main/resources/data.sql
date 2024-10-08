@@ -1,8 +1,8 @@
-INSERT INTO professionals(name, profession) VALUES ('Professional1', 'NUTRITIONIST');
-INSERT INTO professionals(name, profession) VALUES ('Professional2', 'DIETITIAN');
-INSERT INTO professionals(name, profession) VALUES ('Professional3', 'NUTRITIONIST');
-INSERT INTO professionals(name, profession) VALUES ('Professional4', 'DIETITIAN');
-INSERT INTO professionals(name, profession) VALUES ('Professional5', 'NUTRITIONIST');
+INSERT INTO professionals(name, profession, registration_date_time) VALUES ('Professional1', 'NUTRITIONIST', CURRENT_TIMESTAMP);
+INSERT INTO professionals(name, profession, registration_date_time) VALUES ('Professional3', 'NUTRITIONIST', CURRENT_TIMESTAMP);
+INSERT INTO professionals(name, profession, registration_date_time) VALUES ('Professional2', 'DIETITIAN', CURRENT_TIMESTAMP);
+INSERT INTO professionals(name, profession, registration_date_time) VALUES ('Professional4', 'DIETITIAN', CURRENT_TIMESTAMP);
+INSERT INTO professionals(name, profession, registration_date_time) VALUES ('Professional5', 'NUTRITIONIST', CURRENT_TIMESTAMP);
 
 INSERT INTO patients(name, document_number, registration_date_time) VALUES ('Patient1', '12345678901', CURRENT_TIMESTAMP);
 INSERT INTO patients(name, document_number, registration_date_time) VALUES ('Patient2', '12345678902', CURRENT_TIMESTAMP);

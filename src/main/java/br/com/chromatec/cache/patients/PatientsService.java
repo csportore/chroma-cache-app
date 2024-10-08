@@ -10,7 +10,7 @@ import org.springframework.stereotype.Service;
 @Service
 public class PatientsService {
 	
-	private PatientsRepository patientsRepository;
+	private final PatientsRepository patientsRepository;
 	
 	public PatientsService(
 			@Autowired PatientsRepository patientsRepository) {
@@ -18,25 +18,22 @@ public class PatientsService {
 	}
 
 	public PatientDTO insert(PatientDTO dto) {
-		dto.setRegistrationDateTime(LocalDateTime.now());
-		return PatientsMapper.INSTANCE.toDTO(
-				this.patientsRepository.save(PatientsMapper.INSTANCE.toEntity(dto)));
+		var entity = this.patientsRepository.save(PatientsMapper.INSTANCE.dtoToEntity(dto, LocalDateTime.now()));
+		return PatientsMapper.INSTANCE.entityToDTO(entity);
 	}
 
 	public List<PatientDTO> findAll() {
-		return PatientsMapper.INSTANCE.toDTOList(this.patientsRepository.findAll());
+		return PatientsMapper.INSTANCE.entityListToDTOList(this.patientsRepository.findAll());
 	}
 
-	public PatientDTO findById(Long id) throws NoSuchElementException {   
-		return PatientsMapper.INSTANCE.toDTO(
-				this.patientsRepository.findById(id).orElseThrow());
+	public PatientDTO findById(Long id) throws NoSuchElementException {
+		var entity = this.patientsRepository.findById(id).orElseThrow();
+		return PatientsMapper.INSTANCE.entityToDTO(entity, id);
 	}
 
-	public PatientDTO update(Long id, PatientDTO dto) {
-		dto.setId(id);
-		dto.setRegistrationDateTime(LocalDateTime.now());
-		return PatientsMapper.INSTANCE.toDTO(
-				this.patientsRepository.save(PatientsMapper.INSTANCE.toEntity(dto)));
+	public PatientDTO update(PatientDTO dto) {
+		var entity = this.patientsRepository.save(PatientsMapper.INSTANCE.dtoToEntity(dto, LocalDateTime.now()));
+		return PatientsMapper.INSTANCE.entityToDTO(entity);
 	}
 
 	public void delete(Long id) {

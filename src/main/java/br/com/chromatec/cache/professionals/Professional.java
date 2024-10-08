@@ -1,6 +1,8 @@
 package br.com.chromatec.cache.professionals;
 
+import java.io.Serial;
 import java.io.Serializable;
+import java.time.LocalDateTime;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -18,6 +20,7 @@ public class Professional implements Serializable{
 	/**
 	 * 
 	 */
+	@Serial
 	private static final long serialVersionUID = 8669041838179319866L;
 
 	@Id
@@ -30,6 +33,9 @@ public class Professional implements Serializable{
 	@Column(nullable = false)
 	@Enumerated(EnumType.STRING)
 	private ProfessionalOptions profession;
+
+	@Column(nullable = false)
+	private LocalDateTime registrationDateTime;
 	
 //	@OneToMany(fetch = FetchType.LAZY, mappedBy = "professional")
 //	private List<Patient> patients;
@@ -48,6 +54,14 @@ public class Professional implements Serializable{
 
 	public void setName(String name) {
 		this.name = name;
+	}
+
+	public LocalDateTime getRegistrationDateTime() {
+		return registrationDateTime;
+	}
+
+	public void setRegistrationDateTime(LocalDateTime registrationDateTime) {
+		this.registrationDateTime = registrationDateTime;
 	}
 
 	public ProfessionalOptions getProfession() {

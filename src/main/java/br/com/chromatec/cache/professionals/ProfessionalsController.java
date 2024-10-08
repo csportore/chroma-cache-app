@@ -1,6 +1,7 @@
 package br.com.chromatec.cache.professionals;
 
 import java.util.NoSuchElementException;
+import java.util.logging.Logger;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.Cacheable;
@@ -19,8 +20,9 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping(value = "/professionals", produces = MediaType.APPLICATION_JSON_VALUE)
 public class ProfessionalsController {
-	
-	private ProfessionalsService professionalsService;
+
+	private final Logger LOGGER = Logger.getLogger(ProfessionalsController.class.getName());
+	private final ProfessionalsService professionalsService;
 	
 	public ProfessionalsController(@Autowired ProfessionalsService professionalsService) {
 		this.professionalsService = professionalsService;
@@ -29,44 +31,49 @@ public class ProfessionalsController {
 	@PostMapping
 	public ResponseEntity<?> insert(@RequestBody ProfessionalRepresentation representation) {
 		try {
-			var dto = this.professionalsService.insert(ProfessionalsMapper.INSTANCE.toDTO(representation));
-			return ResponseEntity.ok().body(ProfessionalsMapper.INSTANCE.toRepresentation(dto));
+			var dto = this.professionalsService.insert(ProfessionalsMapper.INSTANCE.representationToDTO(null, representation));
+			return ResponseEntity.ok().body(ProfessionalsMapper.INSTANCE.dtoToRepresentation(dto));
 		} catch (Exception e) {
+			LOGGER.severe(e.getMessage());
 			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("OMG - POST");
 		}
 	}
-	
+
 	@GetMapping
 	public ResponseEntity<?> findAll() {
 		try {
-			return ResponseEntity.ok(ProfessionalsMapper.INSTANCE.toRepresentationList(
+			return ResponseEntity.ok(ProfessionalsMapper.INSTANCE.dtoToRepresentationList(
 					this.professionalsService.findAll()));
 		} catch (NoSuchElementException nsee) {
 			return ResponseEntity.status(HttpStatus.NO_CONTENT).body("No records found");
 		} catch (Exception e) {
+			LOGGER.severe(e.getMessage());
 			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("OMG - GET ALL");
 		}
 	}
-	
+
 	@GetMapping("/{id}")
 	@Cacheable("professionals-cache")
 	public ResponseEntity<?> findById(@PathVariable("id") Long id) {
 		try {
-			return ResponseEntity.ok(ProfessionalsMapper.INSTANCE.toRepresentation(
+			return ResponseEntity.ok(ProfessionalsMapper.INSTANCE.dtoToRepresentation(
 					this.professionalsService.findById(id)));
 		} catch (NoSuchElementException nsee) {
+			LOGGER.severe(nsee.getMessage());
 			return ResponseEntity.status(HttpStatus.NO_CONTENT).body("No records found for " + id);
 		} catch (Exception e) {
+			LOGGER.severe(e.getMessage());
 			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("OMG - GET");
 		}
 	}
-	
+
 	@PutMapping("/{id}")
 	public ResponseEntity<?> update(@PathVariable("id") Long id, @RequestBody ProfessionalRepresentation representation) {
 		try {
-			var dto = this.professionalsService.update(id, ProfessionalsMapper.INSTANCE.toDTO(representation));
-			return ResponseEntity.ok().body(ProfessionalsMapper.INSTANCE.toRepresentation(dto));
+			var dto = this.professionalsService.update(ProfessionalsMapper.INSTANCE.representationToDTO(id, representation));
+			return ResponseEntity.ok().body(ProfessionalsMapper.INSTANCE.dtoToRepresentation(dto));
 		} catch (Exception e) {
+			LOGGER.severe(e.getMessage());
 			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("OMG - PUT");
 		}
 	}
@@ -77,6 +84,7 @@ public class ProfessionalsController {
 			this.professionalsService.delete(id);
 			return ResponseEntity.status(HttpStatus.OK).body("Professional with id: " + id + " was deleted.");
 		} catch (Exception e) {
+			LOGGER.severe(e.getMessage());
 			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("OMG - DELETE");
 		}
 	}

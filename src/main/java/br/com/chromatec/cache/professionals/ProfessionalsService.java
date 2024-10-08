@@ -1,5 +1,6 @@
 package br.com.chromatec.cache.professionals;
 
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.NoSuchElementException;
 
@@ -9,7 +10,7 @@ import org.springframework.stereotype.Service;
 @Service
 public class ProfessionalsService {
 	
-	private ProfessionalsRepository professionalsRepository;
+	private final ProfessionalsRepository professionalsRepository;
 	
 	public ProfessionalsService(
 			@Autowired ProfessionalsRepository professionalsRepository) {
@@ -18,26 +19,25 @@ public class ProfessionalsService {
 	
 	// CREATE
 	public ProfessionalDTO insert(ProfessionalDTO dto) {
-		return ProfessionalsMapper.INSTANCE.toDTO(
-				this.professionalsRepository.save(ProfessionalsMapper.INSTANCE.toEntity(dto)));
+		return ProfessionalsMapper.INSTANCE.entityToDTO(
+				this.professionalsRepository.save(ProfessionalsMapper.INSTANCE.dtoToEntity(dto, LocalDateTime.now())));
 	}
-	
+
 	// READ
-	public ProfessionalDTO findById(Long id) throws NoSuchElementException {                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          
-		return ProfessionalsMapper.INSTANCE.toDTO(
+	public ProfessionalDTO findById(Long id) throws NoSuchElementException {
+		return ProfessionalsMapper.INSTANCE.entityToDTO(
 				this.professionalsRepository.findById(id).orElseThrow());
 	}
 
 	public List<ProfessionalDTO> findAll() {
-		return ProfessionalsMapper.INSTANCE.toDTOList(
+		return ProfessionalsMapper.INSTANCE.entityListToDTOList(
 				this.professionalsRepository.findAll());
 	}
-	
+
 	// UPDATE
-	public ProfessionalDTO update(Long id, ProfessionalDTO dto) {
-		dto.setId(id);
-		return ProfessionalsMapper.INSTANCE.toDTO(
-				this.professionalsRepository.save(ProfessionalsMapper.INSTANCE.toEntity(dto)));
+	public ProfessionalDTO update(ProfessionalDTO dto) {
+		return ProfessionalsMapper.INSTANCE.entityToDTO(
+				this.professionalsRepository.save(ProfessionalsMapper.INSTANCE.dtoToEntity(dto, LocalDateTime.now())));
 	}
 	
 	// DELETE
