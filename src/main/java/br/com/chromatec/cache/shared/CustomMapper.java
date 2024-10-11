@@ -16,9 +16,9 @@ public interface CustomMapper<D, E, R, ID> {
     List<R> dtoToRepresentationList(List<D> dtoList);
 
     // Example how to add extra properties with MapStruct
-    @Mapping(target="registrationDateTime", source = "registrationDateTime")
-    E dtoToEntity(D dto, LocalDateTime registrationDateTime);
-    @Mapping(target="registrationDateTime", source = "registrationDateTime")
-    E dtoToEntity(ID id, D dto, LocalDateTime registrationDateTime);
+    @Mapping(target="lastUpdated", source = "lastUpdated")
+    E dtoToEntity(D dto, LocalDateTime lastUpdated);
+    @Mapping(target="lastUpdated", source = "lastUpdated")
+    E dtoToEntity(ID id, D dto, LocalDateTime lastUpdated);
     List<E> dtoToEntityList(Iterable<D> dtoList);
 }
