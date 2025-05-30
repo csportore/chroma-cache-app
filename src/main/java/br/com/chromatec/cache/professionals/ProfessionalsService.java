@@ -4,6 +4,7 @@ import java.time.LocalDateTime;
 import java.util.List;
 import java.util.NoSuchElementException;
 
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -43,5 +44,19 @@ public class ProfessionalsService {
 	// DELETE
 	public void delete(Long id) {
 		this.professionalsRepository.deleteById(id);
+	}
+
+	// PATCH
+	public ProfessionalDTO patch(ProfessionalDTO dto) {
+		var professional = this.professionalsRepository.findById(dto.id()).get();
+		if (dto.name() != null) {
+			professional.setName(dto.name());
+		}
+		if (dto.profession() != null) {
+			professional.setProfession(dto.profession());
+		}
+		professional.setLastUpdated(LocalDateTime.now());
+		return ProfessionalsMapper.INSTANCE.entityToDTO(
+				this.professionalsRepository.save(professional));
 	}
 }
