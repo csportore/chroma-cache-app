@@ -18,7 +18,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping(value = "/professionals", produces = MediaType.APPLICATION_JSON_VALUE)
+@RequestMapping(value = "/professionals", produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
 public class ProfessionalsController {
 
 	private final Logger LOGGER = Logger.getLogger(ProfessionalsController.class.getName());

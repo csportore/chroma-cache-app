@@ -9,6 +9,7 @@ public interface CustomMapper<D, E, R, ID> {
     D entityToDTO(E entity, ID id);
     D entityToDTO(E entity);
     List<D> entityListToDTOList(Iterable<E> entityList);
+
     D representationToDTO(ID id, R representation);
     List<D> representationListToDTOList(List<R> representationList);
 
